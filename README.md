@@ -14,3 +14,8 @@ The tool takes three parameters:
 - ``{account/group-id}`` - specify the databus `account` name and the `group-id` which you would like to deploy, e.g. `m1ci/text`  
 - ``{version}`` - specify the version of the dataset to deploy, e.g. `2020.02.01`
 
+## Prerequirements
+
+- python 3
+- kaggle - `pip3 install kaggle`
+- configure kaggle API Token - get one and insert it in `~/.kaggle/kaggle.json`
