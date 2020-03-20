@@ -1,0 +1,19 @@
+{
+  "title": "DBpedia NIF Dataset", 
+  "subtitle": "Open, Large-scale and Multilingual NLP Training Corpus",
+  "description": "# DBpedia NIF Dataset\nDBpedia NIF - a large-scale and multilingual knowledge extraction corpus. The aim of the dataset is two-fold: to dramatically broaden and deepen the amount of structured information in DBpedia, and to provide large-scale and multilingual language resource for development of various NLP and IR task. The dataset provides the content of all articles for 128 Wikipedia languages.\n## Overview\nThe DBpedia community has put significant amount of effort on developing technical infrastructure and methods for efficient extraction of structured information from Wikipedia. These efforts have been primarily focused on harvesting, refinement and publishing semi-structured information found in Wikipedia articles, such as information from infoboxes, categorization information, images, wikilinks and citations. Nevertheless, still vast amount of valuable information is contained in the unstructured Wikipedia article texts. DBpedia NIF aims to fill in these gaps and extract valuable information from Wikipedia article texts. In its core, DBpedia NIF is a large-scale and multilingual knowledge extraction corpus. The purpose of this project is two-fold: to dramatically broaden and deepen the amount of structured information in DBpedia, and to provide large-scale and multilingual language resource for development of various NLP and IR task. The dataset provides the content of all articles for 128 Wikipedia languages. It captures the content as it is found in Wikipedia-it captures the structure (sections and paragraphs) and the annotations provided by the Wikipedia editors.\n## Key Features and Facts\n* content in 128 Wikipedia languages\n* over 9 billion RDF triples, which is almost 40 % of DBpedia\n* selected partitions published as Linked Data\n* exploited within the TextExt - DBpedia Open Extraction challenge\n* available for large-scale training NLP and IR methods\n## TextExt - DBpedia Open Extraction challenge\nThe DBpedia Open Text Extraction Challenge differs significantly from other challenges in the language technology and other areas in that it is not a one time call, but a continuous growing and expanding challenge with the focus to sustainably advance the state of the art and transcend boundaries in a systematic way. The DBpedia Association and the people behind this challenge are committed to provide the necessary infrastructure and drive the challenge for an indefinite time as well as potentially extend the challenge beyond Wikipedia. We provide data form the DBpedia NIF datasets in 9 different languages and your task is to execute your NLP tool on the data and extract valuable information such as facts, relations, events, terminology, ontologies as RDF triples, or useful NLP annotations such as pos-tags, dependencies or co-reference.\n## Project Team\n* Dr. Milan Dojchinovski (Principle Contact / Maintainer)\n* Dr.-Ing. Sebastian Hellmann",
+  "id": "milandojchinovski/dbpedia-nif-dataset", 
+  "licenses": [{"name": "CC-BY-SA-4.0"}],
+  "resources": [
+    REPLACE_DATASET_RESOURCES
+  ],
+  "keywords": [
+    "NLP",
+    "Deep Learning",
+    "Text Data",
+    "Machine Learning",
+    "Text Mining",
+    "Mining",
+    "Research"
+  ]
+}
