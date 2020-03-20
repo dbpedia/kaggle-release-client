@@ -28,13 +28,11 @@ function deploy
 
 	curl --data-urlencode query@$DATASETS_QUERY_FILE -H "Accept: text/csv" --data-urlencode default-graph-uri= https://databus.dbpedia.org/repo/sparql > results.csv
 
-	rm -r download ; mkdir download ; cd download
+	rm -r download ; mkdir download ; 
 
-	JSON_FMT='{"path":"%s","description":"%s"}\n'
+	cp dataset-metadata-template.json download/dataset-metadata.json
 
-	RESOURCES_LIST=""
-	echo "[INFO] Started downloading the group files."
-	first_pass=false
+	cd download
 	{
 		read
 		while IFS=',', read -r distribution file
@@ -42,21 +40,36 @@ function deploy
 			# download every dataset from the group
 			echo "[INFO] Downloading $file"
 			echo "$file" |  sed 's/\"//g' | xargs wget -q 
-			FILE_PATH="$file"
-			FILE_NAME=$(basename $file)
-			FILE_NAME=$(echo $FILE_NAME | sed 's/\"//g' )
-			DESCRIPTION="dataset description: TODO"
-			if [ "$first_pass" = false ] ; 
-			then
-				RESOURCES_LIST="${RESOURCES_LIST} "$(printf "$JSON_FMT" "$FILE_NAME" "$DESCRIPTION" )
-				first_pass=true
-			else
-				RESOURCES_LIST="${RESOURCES_LIST} ",""$(printf "$JSON_FMT" "$FILE_NAME" "$DESCRIPTION" )
-			fi
 		done
 	} < $TARGETFILE
 
-	echo "${DATASET_METADATA_TEMPLATE/REPLACE_DATASET_RESOURCES/$RESOURCES_LIST}" | sed 's/\%//g' > dataset-metadata.json
+#	JSON_FMT='{"path":"%s","description":"%s"}\n'
+
+#	RESOURCES_LIST=""
+#	echo "[INFO] Started downloading the group files."
+#	first_pass=false
+#	{
+#		read
+#		while IFS=',', read -r distribution file
+#		do	
+#			# download every dataset from the group
+#			echo "[INFO] Downloading $file"
+#			echo "$file" |  sed 's/\"//g' | xargs wget -q 
+#			FILE_PATH="$file"
+#			FILE_NAME=$(basename $file)
+#			FILE_NAME=$(echo $FILE_NAME | sed 's/\"//g' )
+#			DESCRIPTION="dataset description: TODO"
+#			if [ "$first_pass" = false ] ; 
+#			then
+#				RESOURCES_LIST="${RESOURCES_LIST} "$(printf "$JSON_FMT" "$FILE_NAME" "$DESCRIPTION" )
+#				first_pass=true
+#			else
+#				RESOURCES_LIST="${RESOURCES_LIST} ",""$(printf "$JSON_FMT" "$FILE_NAME" "$DESCRIPTION" )
+#			fi
+#		done
+#	} < $TARGETFILE
+
+#	echo "${DATASET_METADATA_TEMPLATE/REPLACE_DATASET_RESOURCES/$RESOURCES_LIST}" | sed 's/\%//g' > dataset-metadata.json
 
 	# FIX REQUIRED: hardcoded account/dataset-id parameter
 	dataset_status=$(kaggle datasets status milandojchinovski/dbpedia-nif-dataset)
@@ -91,11 +104,11 @@ function prepare_datasets_query ()
 	
 	# Get all files
 	SELECT DISTINCT ?distribution ?file WHERE {
-		?dataset dataid:group <https://databus.dbpedia.org/"$1"> .
-		?dataset dct:hasVersion \""$2"\"^^xsd:string .
-		?dataset dcat:distribution ?distribution .
+		<http://dbpedia-generic.tib.eu/release/text/equations/2020.02.01/dataid.ttl#Dataset> dataid:group <https://databus.dbpedia.org/"$1"> .
+		<http://dbpedia-generic.tib.eu/release/text/equations/2020.02.01/dataid.ttl#Dataset> dct:hasVersion \""$2"\"^^xsd:string .
+		<http://dbpedia-generic.tib.eu/release/text/equations/2020.02.01/dataid.ttl#Dataset> dcat:distribution ?distribution .
 		?distribution dcat:downloadURL ?file .
-	}"
+	} LIMIT 2"
 }
 
 
