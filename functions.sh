@@ -2,6 +2,8 @@
 
 # Contributor: Milan Dojchinovski - dojcinovski.milan@gmail.com
 
+
+
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 DATASETS_QUERY_FILE="$ROOT/datasets_query.sparql"
 TARGETFILE="$ROOT/results.csv"
@@ -89,11 +91,11 @@ function prepare_datasets_query ()
 	
 	# Get all files
 	SELECT DISTINCT ?distribution ?file WHERE {
-		<http://dbpedia-generic.tib.eu/release/text/equations/2020.02.01/dataid.ttl#Dataset> dataid:group <https://databus.dbpedia.org/"$1"> .
-		<http://dbpedia-generic.tib.eu/release/text/equations/2020.02.01/dataid.ttl#Dataset> dct:hasVersion \""$2"\"^^xsd:string .
-		<http://dbpedia-generic.tib.eu/release/text/equations/2020.02.01/dataid.ttl#Dataset> dcat:distribution ?distribution .
+		?dataset dataid:group <https://databus.dbpedia.org/"$1"> .
+		?dataset dct:hasVersion \""$2"\"^^xsd:string .
+		?dataset dcat:distribution ?distribution .
 		?distribution dcat:downloadURL ?file .
-	} LIMIT 2"
+	}"
 }
 
 
